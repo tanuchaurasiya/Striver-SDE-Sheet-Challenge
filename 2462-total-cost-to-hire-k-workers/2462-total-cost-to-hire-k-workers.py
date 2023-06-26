@@ -19,7 +19,6 @@ class Solution:
             val,idx=heapq.heappop(h)
             res+=val 
             if idx<i:
-                print("yes")
                 heapq.heappush(h,[costs[i],i]) 
                 i+=1 
             elif idx>i:
@@ -30,6 +29,5 @@ class Solution:
             val,idx=heapq.heappop(h)
             res+=val
             k-=1
-            
         return res
             
