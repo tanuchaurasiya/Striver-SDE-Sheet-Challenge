@@ -13,7 +13,7 @@ class Solution:
             j-=1 
         # print(h)
         heapq.heapify(h) 
-        print(h,i,j)
+        # print(h,i,j)
         res=0
         while i<=j and k>0:
             val,idx=heapq.heappop(h)
