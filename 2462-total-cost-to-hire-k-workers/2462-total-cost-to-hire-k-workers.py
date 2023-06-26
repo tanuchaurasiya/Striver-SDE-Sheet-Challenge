@@ -11,7 +11,7 @@ class Solution:
         while j>=max(i,n-candidates):
             h.append([costs[j],j])
             j-=1 
-        print(h)
+        # print(h)
         heapq.heapify(h) 
         print(h,i,j)
         res=0
