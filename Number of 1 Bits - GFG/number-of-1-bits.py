@@ -1,12 +1,11 @@
 #User function Template for python3
 class Solution:
-	def setBits(self, N):
-	    numberOf1s=0
-        while(N>0):
-            if(N%2==1):
-                numberOf1s+=1
-            N=N//2
-        return numberOf1s
+	def setBits(self, n):
+	    count=0
+        while n > 0:
+            count = count + 1
+            n = n & (n-1)
+        return count
 
 
 #{ 
