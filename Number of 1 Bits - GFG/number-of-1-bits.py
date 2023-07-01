@@ -1,10 +1,10 @@
 #User function Template for python3
 class Solution:
-	def setBits(self, n):
+	def setBits(self, N):
 	    count=0
-        while n > 0:
+        while N > 0:
             count = count + 1
-            n = n & (n-1)
+            N = N & (N-1)
         return count
 
 
