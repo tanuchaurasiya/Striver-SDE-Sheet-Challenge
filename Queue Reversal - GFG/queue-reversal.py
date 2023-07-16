@@ -9,8 +9,8 @@ class Solution:
         while not q.empty(): 
             x=q.get()
             stack.append(x) 
-        while stack:
-            res.put(stack.pop())
+        for i in range(len(stack)):
+            res.put(stack[n-i-1])
         return res
 
 
