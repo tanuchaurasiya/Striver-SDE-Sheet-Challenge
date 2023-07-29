@@ -137,14 +137,9 @@ float findMedian(struct Node *root)
       vec.clear();
       inorder(root); 
       int n=vec.size(); 
-    //   cout<<n<<endl;
-    // for (int i=0;i<n;i++)
-    //     cout<<vec[i]<<" ";
-    // cout<<endl;
-    // cout<<vec[int(n/2)-1]<<" "<<vec[int(n/2)];
-      if(n%2==0){
+      if(n%2==0)
           return float(vec[int(n/2)-1]+vec[int(n/2)])/2;
-      }
+      
       return vec[int((n+1)/2)-1];
 }
 
