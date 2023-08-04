@@ -11,7 +11,7 @@ class Solution{
     //code
     sort(v.begin(),v.end()); 
     int i=0;
-    int res=1e9;
+    int res=v[m-1]-v[0];
     //  for(auto i:v)
     //      cout<<i <<" ";
     while(i<=n-m)
