@@ -4,42 +4,56 @@ using namespace std;
 
 // } Driver Code Ends
 
+
 class Solution {
 public:
-    bool check(int i,int j,int row,int col){
-        return i>-1&&i<row && j>-1&&j<col;
+    
+    bool isValid(int i,int j, int r,int c, int clr, vector<vector<int>>& image)
+    {
+        if(i>=0 && j>=0 && i<r && j<c && image[i][j]==clr)
+            return true;
+        return false;
     }
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int clr) {
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
         // Code here 
-
-        //these array are the direction in which flood water can move
-        int row[4]={0,-1,0,1};
-        int col[4]={-1,0,1,0};
-
-        //size of area
-        int n=image.size(),m=image[0].size();
-
-        //visited area 
-        vector<vector<bool>> visited(n, vector<bool>(m, false));
-        queue <pair<int,int>> q;
-        int oldclr=image[sr][sc];
-        q.push({sr,sc});
-        while(!q.empty()){
-            int i=q.front().first;
-            int j=q.front().second;
-            visited[i][j]=true;
-            image[i][j]=clr;
+        if(image[sr][sc]==newColor) 
+            return image;
+        int r=image.size();
+        int c=image[0].size();
+        int clr = image[sr][sc];
+        queue<pair<int,int>> q; 
+        q.push({sr,sc}); 
+        image[sr][sc]=newColor;
+        while(!q.empty())
+        { 
+            int i = q.front().first;
+            int j = q.front().second; 
             q.pop();
-            for(int k=0;k<4;k++){
-                if(check(i+row[k],j+col[k],n,m)&& image[i+row[k]][j+col[k]]==oldclr && !visited[i+row[k]][j+col[k]]){
-                    image[i+row[k]][j+col[k]]=clr;
-                    visited[i+row[k]][j+col[k]]=true;
-                    q.push({i+row[k],j+col[k]});
-                }
-            }
-        }
+            
+            if(isValid(i-1,j,r,c,clr,image)) {
+                q.push({i-1,j});
+                image[i-1][j]=newColor;}
+                
+            if(isValid(i,j-1,r,c,clr,image)) {
+                q.push({i,j-1});
+                image[i][j-1]=newColor;}
+                
+            if(isValid(i+1,j,r,c,clr,image)) {
+                q.push({i+1,j});
+                image[i+1][j]=newColor;}
+                
+            if(isValid(i,j+1,r,c,clr,image)) {
+                q.push({i,j+1});
+                image[i][j+1]=newColor;}
+                
+        } 
+        
         return image;
     }
+    
+    
+    
+    
 };
 
 //{ Driver Code Starts.
