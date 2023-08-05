@@ -4,38 +4,32 @@ using namespace std;
 
 // } Driver Code Ends
 
+
+
 class Solution{
     public:
     //Complete this function
-    void solve(string temp,string S,vector<string> &ans,int n, vector<int> &vis,int ind=0){
-        if(ind==n){
-           ans.push_back(temp);
-           return;
+    void findAllPermutations(string s, string permut, vector<string> &ans) {
+        if(s.length()==0) {
+            ans.push_back(permut);
+            return;
         }
-        for(int i=0;i<n;i++){
-            if(!vis[i]){
-                vis[i]=1;
-                temp.push_back(S[i]);
-                solve(temp,S,ans,n,vis,ind+1);
-                temp.pop_back();
-                vis[i]=0;
-            }
-        }
+        for(int i=0; i<s.length(); i++) {
+            permut+=s[i];
+            findAllPermutations((s.substr(0, i)+s.substr(i+1)), permut, ans);
+            permut.pop_back();
+        }        
     }
-    
-    vector<string> permutation(string S)
+    vector<string> permutation(string &s)
     {
-        //Your code here
-        int n = S.size();
         vector<string> ans;
-        vector<int> vis(n,0);
-        string temp="";
-        
-        solve(temp,S,ans,n,vis);
-        sort(ans.begin(),ans.end());
+        findAllPermutations(s, "", ans);
+        sort(ans.begin(), ans.end());
         return ans;
     }
 };
+
+
 
 
 //{ Driver Code Starts.
