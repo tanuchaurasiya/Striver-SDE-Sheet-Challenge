@@ -4,26 +4,34 @@
 using namespace std;
 
 // } Driver Code Ends
-//User function Template for C++
+//User function Template for C++ 
+
 class Solution
 {
     public:
-    int countFractions(int n, int numerator[], int denominator[])
-    {
-        map<pair<int,int>,int> mp;
-        int ans=0;
+    int countFractions(int n, int nume[], int deno[])
+    { 
+        map<pair<int,int>,int> m;
+        int res=0;
         for(int i=0;i<n;i++){
-            int d = __gcd(numerator[i],denominator[i]);
-            int a=numerator[i]/d;
-            int b=denominator[i]/d;
-            int diff=b-a;
-            if(mp.find({diff,b})!=mp.end()) ans+=mp[{diff,b}];
-            mp[{a,b}]++;
-        }
-        return ans;
-
+            int fac=__gcd(nume[i],deno[i]);
+            nume[i]=nume[i]/fac;
+            deno[i]=deno[i]/fac;
+        } 
+        
+        for(int i=0;i<n;i++) 
+        {
+            if(m.find({deno[i]-nume[i],deno[i]})!=m.end())
+            {
+                res+=m[{deno[i]-nume[i],deno[i]}];
+            }
+            m[{nume[i],deno[i]}]++;
+        } 
+        
+        return res;
     }
 };
+
 
 //{ Driver Code Starts.
 int main()
