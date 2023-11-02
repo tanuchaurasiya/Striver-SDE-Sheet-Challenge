@@ -26,8 +26,12 @@ class Solution
         Node* t= head; 
         Node* newhead=new Node(101);
         Node* res=newhead;
+        unordered_map<int, Node*> mp; 
+        int c=1;
         while(t){
-            newhead->next = new Node(t->data); 
+            newhead->next = new Node(t->data);  
+            mp[c]=newhead->next;
+            c++;
             newhead=newhead->next;
             t=t->next;
         } 
@@ -44,21 +48,14 @@ class Solution
             } 
             else{
             Node* t1=head; 
-            int count=0; 
+            int count=1; 
             
             while(t1!=t->arb){
                 count+=1; 
                 t1=t1->next;
             } 
             
-            
-            Node* temp = final;
-            while(count){
-                temp=temp->next;
-                count--;
-                
-            }  
-            res->arb = temp;
+            res->arb = mp[count];
             t=t->next;
             res=res->next;
             }
