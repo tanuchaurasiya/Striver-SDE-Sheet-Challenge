@@ -96,41 +96,54 @@ Node* buildTree(string str)
 
 class Solution {
   public:
-    vector <int> bottomView(Node *root) {
-
- vector<int> ans;
-        if(root == NULL){
-            return ans;
+    static bool comparator(pair<int,int> p1, pair<int,int> p2){
+       // custom definition code 
+        if(p1.first>=p2.first) 
+           return true;
+        return false;
+    }
+    
+    void help(Node *root, int row, int col, unordered_map<int, pair<int,int>> &mp){  
+        if (root==NULL) 
+            return ;
+        
+    
+        if(mp.find(col)==mp.end()) {
+            mp[col]={row,root->data};
         }
-        
-        map<int,int> topnode; // hd and root->data 
-        queue<pair<Node*,int>> q; //  root and hd 
-        q.push(make_pair(root,0));
-        
-        while(!q.empty()){
-            pair<Node*,int> temp = q.front();
-            q.pop();
-            
-            Node* frontnode = temp.first;
-            int hd = temp.second;
-            
-            // 1to1 maping 
-            topnode[hd] = frontnode->data;
-            
-            if(frontnode->left){
-                q.push(make_pair(frontnode->left,hd-1));
-            }
-            if(frontnode->right){
-                q.push(make_pair(frontnode->right,hd+1));
+        else {
+            if((*mp.find(col)).second.first<=row) {
+                mp[col]={row,root->data};
             }
         }
         
-        for(auto i : topnode){
-            ans.push_back(i.second);
-        }
-        return ans;
+        help(root->left, row+1, col-1, mp); 
+        help(root->right, row+1, col+1, mp); 
+    }
+    
 
-}
+    vector <int> bottomView(Node *root){ 
+        
+        unordered_map<int, pair<int,int>> mp;
+        help(root, 0, 0, mp); 
+        
+        vector<int> keys; 
+        
+        for(auto i:mp){
+            keys.push_back(i.first); 
+            // cout<<i.first<<endl;
+        } 
+        sort(keys.begin(), keys.end()); 
+        vector<int> res; 
+        
+        
+        for(auto key:keys){
+            res.push_back(mp[key].second);
+        } 
+        
+        return res;
+        
+    }
 };
 
 
