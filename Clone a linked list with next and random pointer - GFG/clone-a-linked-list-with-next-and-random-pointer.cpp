@@ -23,47 +23,23 @@ class Solution
     public:
     Node *copyList(Node *head)
     {
-        Node* t= head; 
-        Node* newhead=new Node(101);
-        Node* res=newhead;
-        unordered_map<int, Node*> mp; 
-        int c=1;
+        //Write your code here 
+        unordered_map<Node*, Node*> mp;
+        Node* t = head; 
         while(t){
-            newhead->next = new Node(t->data);  
-            mp[c]=newhead->next;
-            c++;
-            newhead=newhead->next;
+            mp[t] = new Node(t->data);
             t=t->next;
         } 
         
-        res=res->next; 
-        Node* final=res;
-        t=head; 
-        
+        t= head; 
         while(t){
-            if(t->arb==NULL){
-                res->arb=NULL;
-                t=t->next;
-                res=res->next;
-            } 
-            else{
-            Node* t1=head; 
-            int count=1; 
-            
-            while(t1!=t->arb){
-                count+=1; 
-                t1=t1->next;
-            } 
-            
-            res->arb = mp[count];
+            mp[t]->next =  mp[t->next]; 
+            mp[t]->arb =  mp[t->arb]; 
             t=t->next;
-            res=res->next;
-            }
-            
-        }
-        return final;
-    } 
-    
+        } 
+        
+        return mp[head];
+    }
 
 };
 
