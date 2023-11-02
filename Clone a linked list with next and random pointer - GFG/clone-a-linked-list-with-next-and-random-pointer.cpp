@@ -24,21 +24,21 @@ class Solution
     Node *copyList(Node *head)
     {
         //Write your code here 
-        unordered_map<Node*, Node*> mp;
+        unordered_map<Node*, Node*> old_to_new;
         Node* t = head; 
         while(t){
-            mp[t] = new Node(t->data);
+            old_to_new[t] = new Node(t->data);
             t=t->next;
         } 
         
         t= head; 
         while(t){
-            mp[t]->next =  mp[t->next]; 
-            mp[t]->arb =  mp[t->arb]; 
+            old_to_new[t]->next =  old_to_new[t->next]; 
+            old_to_new[t]->arb =  old_to_new[t->arb]; 
             t=t->next;
         } 
         
-        return mp[head];
+        return old_to_new[head];
     }
 
 };
