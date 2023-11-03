@@ -1,109 +1,84 @@
-struct node{
+struct node{ 
+    int val;
     int key;
-    int val; 
     node* prev;
     node* next;
+    node(int k,int v){
+        key=k;
+        val=v;
+        prev=NULL;
+        next=NULL;
+    }
+    
 };
+
 class LRUCache {
-private: 
-    unordered_map<int, node*> map;
-    int cap;
+private:
+    unordered_map<int, node*> mp;
     node* head;
     node* tail;
-    
+    int size; 
+    int currsize;
 public:
-    LRUCache(int capacity) {
-        cap=capacity;
-        head = new node();
-        head->key=-1;
-        head->val=-1; 
+    LRUCache(int capacity) { 
+        size = capacity; 
+        currsize = 0;
+        head = new node(-1,-1);
+        tail = new node(-1,-1); 
+        head->next = tail;
+        tail->prev = head;
         
-        tail= new node(); 
-        tail->key=-1;
-        tail->val=-1; 
-    
-        head->next=tail;
-        tail->prev=head; 
-    
     }
     
-    int get(int key) {
-        if(map.find(key)==map.end())
-            return -1;
+    void insert(int key, int value){
+        node* newnode = new node(key, value); 
+        newnode->next = head->next; 
+        newnode->prev = head; 
+        head->next->prev = newnode;
+        head->next = newnode; 
+        mp[key] = newnode;
+    } 
+    
+    void del(int key){
+        node* n = mp[key]; 
+        n->prev->next = n->next; 
+        n->next->prev = n->prev; 
+        n->next = NULL;
+        n->prev = NULL;
+        delete n;  
+        mp[key]=NULL;
         
-        node* existingnode = map[key] ;
-        int ret=existingnode->val;
-        existingnode->prev->next  = existingnode->next ;
-        existingnode->next->prev = existingnode->prev ;
-        existingnode->prev=NULL;
-        existingnode->next=NULL; 
-        delete existingnode;
-                
-        node* headnext=head->next;
-        node* newnode=new node();
-        newnode->key=key;
-        newnode->val=ret;
-        head->next=newnode;
-        newnode->prev=head;
-        newnode->next = headnext; 
-        headnext->prev=newnode;
-        map[key] = newnode; 
-        return ret;
     }
     
-    void put(int key, int val) { 
-        if(map.find(key)!=map.end())
-        {
-            node *existingnode = map[key]; 
-            existingnode->prev->next  = existingnode->next; 
-            existingnode->next->prev = existingnode->prev ;
-            existingnode->prev=NULL;
-            existingnode->next=NULL;
-            delete existingnode;
-                
-            node *headnext=head->next;
-            node *newnode=new node();
-            newnode->key=key;
-            newnode->val=val;
-            head->next=newnode ;
-            newnode->prev=head ;
-            newnode->next = headnext ;
-            headnext->prev=newnode;
-            map[key] = newnode; 
-        } 
+    int get(int key) { 
+        if(mp[key]==NULL)
+            return -1; 
+        int value = mp[key]->val; 
         
-        else if (cap>map.size()){ 
-            
-            node *headnext=head->next; 
-            node *newnode=new node();
-            newnode->key=key;
-            newnode->val=val;
-            head->next=newnode; 
-            newnode->prev=head;
-            newnode->next = headnext; 
-            headnext->prev=newnode;
-            map[key] = newnode;
+        del(key);  
+        insert(key,value); 
+        
+        return value;   
+    }
+    
+    void put(int key, int value) { 
+        if(mp[key]!=NULL){
+            del(key);
+            insert(key,value); 
+            return;
         }
-            
+        if(size==currsize){ 
+            node* n = tail->prev;
+            int v = n->val;
+            int k = n->key; 
+            del(k);
+            insert(key,value);
+        }
         else{ 
-            node *deletednode = tail->prev;
-            deletednode->prev->next = tail;
-            tail->prev=deletednode->prev;
-            map.erase(deletednode->key); 
-            deletednode->prev=NULL;
-            deletednode->next=NULL;
-            delete deletednode;
+            currsize+=1; 
+            insert(key,value);
             
-            node* headnext=head->next;
-            node* newnode=new node();
-            newnode->key=key;
-            newnode->val=val;
-            head->next=newnode; 
-            newnode->prev=head ;
-            newnode->next = headnext ;
-            headnext->prev=newnode;
-            map[key] = newnode;
-        }
+        } 
         
     }
 };
