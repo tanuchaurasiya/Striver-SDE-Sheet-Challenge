@@ -10,26 +10,72 @@
  */
 class Solution {
 public:
-    ListNode* mergeKLists(vector<ListNode*>& lists) { 
-        vector<int> v; 
-        for(int i=0;i<lists.size();i++){
-            ListNode* t = lists[i];
-            while (t){
-                v.push_back(t->val);
-                t=t->next; 
-            }
+    ListNode* mergeTwoList(ListNode* l1, ListNode* l2){
+        if(l2==NULL) 
+            return l1; 
+        if(l1==NULL) 
+            return l2; 
+        
+        ListNode* res=NULL; 
+        ListNode* temp=NULL;
+        if (l1->val < l2->val){ 
+            res=l1; 
+            temp=l1; 
+            l1=l1->next;
+        } 
+        else{
+            res=l2; 
+            temp=l2; 
+            l2=l2->next;
         } 
         
-        sort(v.begin(),v.end()); 
-        
-        ListNode* temp=new ListNode(0); 
-        ListNode* res=temp;
-        for(int i=0;i<v.size();i++) {
-            temp->next = new ListNode(v[i]) ;
+        while(l1 && l2){
+            if (l1->val < l2->val){  
+            temp->next=l1; 
+            l1=l1->next; 
+            temp=temp->next;
+            } 
+        else{ 
+            temp->next=l2; 
+            l2=l2->next; 
             temp=temp->next; 
+            } 
         } 
         
-        return res->next;
+        while(l1){
+            temp->next = l1; 
+            temp=temp->next; 
+            l1 = l1->next;
+        } 
+        
+        while(l2){
+            temp->next=l2; 
+            l2=l2->next; 
+            temp=temp->next;
+        } 
+        
+        return res;
+        
+            
+    }
+    ListNode* mergeKLists(vector<ListNode*>& lists) {   
+        if(lists.size()==0)
+            return NULL;
+        if(lists.size()==1){
+            return lists[0];
+        }
+        vector<ListNode* > mergeTwoListVector; 
+        
+        for(int i=0;i<lists.size();i=i+2){
+            ListNode* l1 = lists[i];  
+            ListNode* l2 = NULL;
+            if(i+1<lists.size()) 
+                l2 = lists[i+1]; 
+           ListNode* merge = mergeTwoList(l1,l2); 
+           mergeTwoListVector. push_back(merge);  
+        }
+        return mergeKLists(mergeTwoListVector); 
+        
         
     }
 };
