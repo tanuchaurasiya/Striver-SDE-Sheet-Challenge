@@ -1,25 +1,31 @@
-class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        i=0
-        n=len(s) 
-        res=0
-        while(i<n): 
-            st = set(s[i]) 
-            j=i+1
-            while(j<n):  
-                if s[j] not in st: 
-                    st.add(s[j]) 
-                    j+=1 
-                else: 
-                    res=max(res, j-i) 
-                    break 
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int i=0;
+        int n= s.length(); 
+        int res= 0;
+        // cout<<n;
+        while(i<n){
+            int j=i+1;
+            unordered_set<char> st; 
+            st.insert(s[i]); 
             
-            res=max(res, j-i) 
+            while(j<n){
+                if(st.find(s[j])==st.end()) { 
+                    st.insert(s[j]); 
+                    j+=1;
+                }
+                else{
+                    res=max(res, j-i);
+                    break;
+                }
+            }
+            
+            
+            res=max(res,j-i);
             i+=1;
-            
-        return res
-                    
-                    
-                
-                
+        }
+        return res;
+    }
         
+};
