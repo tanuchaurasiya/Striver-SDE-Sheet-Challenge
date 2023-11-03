@@ -7,12 +7,12 @@ public:
         // cout<<n;
         while(i<n){
             int j=i+1;
-            unordered_set<char> st; 
-            st.insert(s[i]); 
+            unordered_map<char, int> st; 
+            st[s[i]]=1; 
             
             while(j<n){
-                if(st.find(s[j])==st.end()) { 
-                    st.insert(s[j]); 
+                if(st[s[j]]==0) { 
+                    st[s[j]]=1; 
                     j+=1;
                 }
                 else{
