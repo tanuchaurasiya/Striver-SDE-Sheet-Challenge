@@ -23,7 +23,6 @@ public:
                 r+=1;
             } 
             
-            cout<<"x="<<x<<endl;
             l = i;
             r = i+1;
            
@@ -39,8 +38,6 @@ public:
                 l-=1;
                 r+=1;
             } 
-            
-            cout<<"xq="<<x<<endl;
             
         }
         return op;
