@@ -20,10 +20,6 @@ public:
         
         sort(counter.rbegin(),counter.rend()); 
         
-        for(auto i: counter){
-            cout<<i.first<<" "<<i.second<<endl;
-        } 
-        // return "";
         vector<char> res(n); 
         int idx=0;
         for(auto i:counter){
