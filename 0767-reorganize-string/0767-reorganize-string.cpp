@@ -6,16 +6,13 @@ public:
         for(int i=0;i<n;i++){
             mp[s[i]]+=1;
         } 
-        cout<<n<<endl;
+       
         vector<pair<int,char>> counter; 
 
-        for(auto i:mp){ 
-            char c = i.first; 
-            int count = i.second;
-            if(count > int((n+1)/2))
+        for(auto i:mp){  
+            if(i.second > int((n+1)/2))
                 return "";
-            pair<int,char>p{count, c};
-            counter.push_back(p); 
+            counter.push_back({i.second, i.first}); 
         }
         
         sort(counter.rbegin(),counter.rend()); 
@@ -23,13 +20,11 @@ public:
         vector<char> res(n); 
         int idx=0;
         for(auto i:counter){
-            int count = i.first;
-            char c = i.second;
             
-            while(count){
-                res[idx] = c;
+            while(i.first){
+                res[idx] = i.second;
                 idx+=2;
-                count-=1;
+                i.first-=1;
          
                 if(idx>=n)
                     idx=1;
