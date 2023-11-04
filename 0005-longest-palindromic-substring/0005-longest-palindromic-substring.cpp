@@ -10,37 +10,38 @@ public:
             int l = i;
             int r = i;
             string x ="";
-            while(l>=0 && r<=n-1 && s[l]==s[r]){ 
-                if(l==r)
-                    x+=s[l]; 
-                else
-                    x=s[l] + x + s[r];
+            while(l>=0 && r<=n-1 && s[l]==s[r]){  
+                if (res<r-l+1){
+                    res=r-l+1; 
+                    for(int j=l;j<=r;j++)
+                       x+=s[j];
+                    op = x;  
+                    x="";
+                } 
             
                 l-=1;
                 r+=1;
             } 
             
-            // cout<<"x before ="<<x<<endl;
-            if (res<r-l+1){
-                res=r-l+1; 
-                op = x;
-            } 
-            
+            cout<<"x="<<x<<endl;
             l = i;
             r = i+1;
-            x="";
+           
             
             while(l>=0 && r<=n-1 && s[l]==s[r]){
-                x=s[l]+x+s[r]; 
+                if (res<r-l+1){
+                    res=r-l+1; 
+                    for(int j=l;j<=r;j++)
+                       x+=s[j];
+                    op = x;
+                    x="";
+                } 
                 l-=1;
                 r+=1;
             } 
             
-            // cout<<"x after ="<<x<<endl;
-            if (res<r-l+1){
-                res=r-l+1; 
-                op = x;
-            } 
+            cout<<"xq="<<x<<endl;
+            
         }
         return op;
     }
