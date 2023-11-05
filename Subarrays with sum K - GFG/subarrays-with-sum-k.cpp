@@ -21,10 +21,10 @@ class Solution{
                     res+=1; 
                 if(prefixsum.find(sum-k)!=prefixsum.end())
                 {
-                    res+=prefixsum[sum-k].size();
+                    res+=prefixsum[sum-k];
                 }
                 
-                prefixsum[sum].push_back(i);;
+                prefixsum[sum]+=1;
             }
         return res;
     }
