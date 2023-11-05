@@ -4,7 +4,7 @@ public:
         int sum=0;
         int res=0;
         int N=A.size();
-        unordered_map<int,vector<int>> prefixsum; 
+        unordered_map<int,int> prefixsum; 
         for(int i=0;i<N;i++)
             {
                 sum+=A[i]; 
@@ -12,10 +12,10 @@ public:
                     res+=1; 
                 if(prefixsum.find(sum-k)!=prefixsum.end())
                 {
-                    res+=prefixsum[sum-k].size();
+                    res+=prefixsum[sum-k];
                 }
                 
-                prefixsum[sum].push_back(i);
+                prefixsum[sum]+=1;;
             }
         return res;
     }
