@@ -27,7 +27,7 @@ public:
             for (auto& next : adjMap[curr]) {
                 if (!visited[next]) {
                     curr=next;
-                    break;
+                    // break;
                 }
             }
         }
