@@ -11,32 +11,20 @@
  */
 class Solution {
 public:
-    int Largest(vector<int>&nums,int low,int high){
-        int maxi  = INT_MIN;
-        int ind = -1;
-        for( int i=low;i<=high; i++){
-            if(nums[i]>maxi){
-               maxi  = nums[i];
-               ind=i;
-            }
-        }
-        return ind;
-    }
-    TreeNode*buildTree(vector<int>&nums,int low ,int high){
-        if(low>high){
-            return NULL;
-        }
-        int pos = Largest(nums,low,high);
-        TreeNode*root = new TreeNode(nums[pos]);
-        root->left= buildTree(nums,low,pos-1);
-        root->right = buildTree(nums,pos+1,high);
-        return root;
-    }
-
     TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
-        int low = 0;
-        int high = nums.size()-1;
-        TreeNode*ans = buildTree(nums,low,high);
-        return ans;
+        stack<TreeNode*> st; 
+        for(int i=0;i<nums.size();i++){
+            TreeNode* curr=new TreeNode(nums[i]);
+            while(st.size() && st.top()->val<nums[i]){
+                curr->left=st.top();
+                st.pop();
+            }
+            if(st.size()){
+                st.top()->right=curr;
+            }
+            st.push(curr);
+        }
+        while(st.size()!=1) st.pop();   
+        return st.top();  
     }
 };
