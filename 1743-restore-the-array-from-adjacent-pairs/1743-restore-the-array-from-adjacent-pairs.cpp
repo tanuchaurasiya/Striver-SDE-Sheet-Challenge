@@ -20,18 +20,22 @@ public:
         }
         int curr = start, prev = INT_MIN;
         vector<int> nums; 
+        nums.push_back(curr);
         unordered_map<int,int> visited;
-        while (nums.size() < adj.size()) {
-            nums.push_back(curr);
-            visited[curr]=1;
+        visited[curr]=1;
+        
+        while (nums.size() < adjMap.size()) {
+            cout<<"curr="<<curr<<endl;
             for (auto& next : adjMap[curr]) {
                 if (!visited[next]) {
+                     cout<<"next="<<next<<endl;
+                    nums.push_back(next);
+                    visited[next]=1;
                     curr=next;
-                    // break;
                 }
             }
         }
-        nums.push_back(curr);
+        // nums.push_back(curr);
         return nums;
     }
 };
