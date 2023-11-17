@@ -5,7 +5,6 @@ public:
         int n = nums.size();
         for(int i=0;i<n;i++)
             nums.push_back(nums[i]);
-        
         n=n+n;
         for(int i = n-1; i>=0 ; i--){
             if(s.empty()){
@@ -16,7 +15,6 @@ public:
                 while(!s.empty()){
                     int idx = s.top().first;
                     int val = s.top().second;
-                    
                     if(nums[i]>=val)
                         s.pop();
                     else{
@@ -31,11 +29,9 @@ public:
                 }
             }
         }
-        
-        n=n/2;
-        vector<int> res(n);
-        for(int i=0;i<n;i++)
-            res[i]=nums[i];
+        vector<int> res;
+        for(int i=0;i<n/2;i++)
+            res.push_back(nums[i]);
         return res;
     }
 };
