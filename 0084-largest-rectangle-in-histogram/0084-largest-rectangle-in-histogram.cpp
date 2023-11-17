@@ -62,9 +62,9 @@ public:
         }
     
         int res=0;
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n;i++)
             res=max(res, (rightSmaller[i]-leftSmaller[i]+1)*heights[i]);
-        }
+        
         return res;
     }
 };
