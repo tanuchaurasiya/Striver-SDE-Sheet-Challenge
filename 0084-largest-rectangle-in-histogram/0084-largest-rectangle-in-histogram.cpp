@@ -60,10 +60,7 @@ public:
                 }
             }
         }
-        
-        for(auto i:leftSmaller) cout<<i<<" ";
-        cout<<endl;
-        for(auto i:rightSmaller) cout<<i<<" ";
+    
         int res=0;
         for(int i=0;i<n;i++){
             res=max(res, (rightSmaller[i]-leftSmaller[i]+1)*heights[i]);
