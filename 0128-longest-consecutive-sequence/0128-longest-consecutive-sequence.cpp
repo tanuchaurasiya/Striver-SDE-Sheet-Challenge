@@ -1,24 +1,34 @@
+// Watch striver vdo
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        unordered_set<int> sett;
-        for(auto i:nums)
-            sett.insert(i);
-        
         int res=0;
-        for(auto i:sett){
-            if(sett.find(i-1)!=sett.end())
-                continue;
-            int count = 0;
-            int x = i;
-            while(sett.find(x)!=sett.end()) 
+        int n=nums.size();
+        if(n==0)return 0;
+        sort(nums.begin(), nums.end());
+        int i=1;
+        int count=1;
+        long long int prev = nums[0];
+        while(i<n){
+            if(nums[i]==prev) 
+                i++;
+            
+            else if(nums[i]==prev+1) {
+                prev=nums[i];
+                i++;
+                count++;
+            } 
+            
+            else
             {
-                count+=1;
-                x+=1;
+                res=max(res, count);
+                prev=nums[i];
+                count=1;
+                i++;
             }
             
-            res=max(res, count);
         }
+        res=max(res, count);
         return res;
     }
 };
