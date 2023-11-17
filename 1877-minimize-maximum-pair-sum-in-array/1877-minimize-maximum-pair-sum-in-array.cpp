@@ -1,16 +1,29 @@
 class Solution {
 public:
     int minPairSum(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        int i=0;
-        int j= nums.size()-1;
-        int res=0;
-        while(i<j)
-        {
-            res= max(res, nums[j]+nums[i]);
-            i+=1;
-            j-=1;
+        int max = INT_MIN;
+        int min = INT_MAX;
+        int hash[100001] = {0};
+
+        for (int num : nums) {
+            hash[num]++;
+            max = std::max(max, num);
+            min = std::min(min, num);
         }
-        return res;
+
+        int low = min;
+        int high = max;
+        max = INT_MIN;
+        while (low <= high) {
+            if (hash[low] == 0) low++;
+            else if (hash[high] == 0) high--;
+            else {
+                max = std::max(max, low + high);
+                hash[low]--;
+                hash[high]--;
+            }
+        }
+
+        return max;
     }
 };
