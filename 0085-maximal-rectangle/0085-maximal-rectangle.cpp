@@ -78,11 +78,6 @@ public:
                 else
                     heights[j] = 0;
             }
-            
-            for(auto u:heights)
-                cout<<u<<" ";
-            cout<<endl;
-            
             ans = max(ans, maxHistogramArea(heights));
         }
         
