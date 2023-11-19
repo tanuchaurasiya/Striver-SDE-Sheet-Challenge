@@ -2,10 +2,7 @@ class Solution {
 public:
     bool coloring(int node,int par,vector<vector<int>>& graph, vector<int> &visited, vector<int> &color){
         visited[node]=1;
-        cout<<"node and par "<<node<<" "<<par<<endl;
-        if(par!=-1)
-        {
-            cout<<"parent clr "<<color[par]<<endl;
+        if(par!=-1){
             if(color[par]==0)
                 color[node]=1;
             else
@@ -13,16 +10,12 @@ public:
         }
         
         for(auto child: graph[node]){
-            cout<<"child and visited "<<child<<" "<<visited[child]<<endl;
             if(!visited[child]){
                 if (coloring(child, node, graph, visited, color)==true) 
                     return true;
-                else
-                    return false;
+                return false;
             }
             else{
-                cout<<"child and node "<<child<<" "<<node<<endl;
-                cout<<"child clr="<<color[child]<<" node clr="<<color[node]<<endl;
                 if(color[child] == color[node])
                     return false;
             }
