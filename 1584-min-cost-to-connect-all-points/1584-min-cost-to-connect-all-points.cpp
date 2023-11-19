@@ -20,14 +20,13 @@ public:
             long long int n = pq.top().second;
             pq.pop();
             if(visited[n]==1) continue;
-            // cout<<"d and n "<<d<<" "<<n<<endl;
             res+=d;
             visited[n] = 1;
             
             for(auto child : adj[n]){
                 if(!visited[child.second]){
                     pq.push({child.first, child.second});
-                    // cout<<"child weight and node "<<child.first<<" "<<child.second<<endl;
+                    
                 }
             }
         } 
