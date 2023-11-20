@@ -3,6 +3,8 @@ public:
     bool help(int i, int j, string s, string p, int n, int m, vector<vector<int>>&dp){
         if(i>=n && j>=m) 
             return true;
+        if(i<n && j>=m)
+            return false;
         if(i>=n && j<m){
             while(j<m ){
                 if(p[j]!='*') return false;
@@ -11,8 +13,7 @@ public:
             return true;
         }
             
-        if(i<n && j>=m)
-            return false;
+        
         
         if(dp[i][j]!=-1)
             return dp[i][j];
