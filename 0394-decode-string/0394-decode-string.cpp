@@ -14,7 +14,7 @@ public:
                 st.pop();
                 int num = 0;
                 int x=0;
-                while((!st.empty()) && (!(st.top()>= 97 && st.top()<=122)) && (st.top()!='[' )){
+                while((!st.empty()) && (st.top()>='0' && st.top()<='9')){
                     int n = st.top() - int('0'); 
                     if(x==0){
                         num=n;
