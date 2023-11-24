@@ -12,12 +12,10 @@ public:
                     st.pop();
                 }
                 st.pop();
-                cout<<"temp = "<<temp<<endl;
                 int num = 0;
                 int x=0;
                 while((!st.empty()) && (!(st.top()>= 97 && st.top()<=122)) && (st.top()!='[' )){
                     int n = st.top() - int('0'); 
-                    cout<<"n="<<n<<endl;
                     if(x==0){
                         num=n;
                         x=1;
@@ -29,7 +27,6 @@ public:
                     
                     st.pop(); 
                 }
-                cout<<"num="<<num<<endl;
                 if(!st.empty()) {
                     while(num){
                         for(auto i: temp) 
@@ -43,7 +40,6 @@ public:
                         res+=temp;
                         num--;
                     }
-                    cout<<"res="<<res<<endl;
                 }
                 
             }
