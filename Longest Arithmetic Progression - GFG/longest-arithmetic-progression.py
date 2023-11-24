@@ -4,8 +4,8 @@ class Solution:
     def lengthOfLongestAP(self, nums, n):
         # code here
         d={}
-        if n==1:
-            return 1
+        if n<=2:
+            return n
         for i in range(n):
             for j in range(i+1, n):
                 diff = nums[j] - nums[i]
