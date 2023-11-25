@@ -6,46 +6,33 @@ using namespace std;
 class Solution
 {
 	public:
-	int find(int a, vector<int>&graph){
-	    if(graph[a]<0) 
-	        return a;
-	    int temp = find(graph[a], graph);
-	    graph[a] = temp;
-	    return temp;
-	}
-	
-	bool Union(int a, int b, vector<int> &graph){
-	    int n1 = find(a, graph);
-	    int n2 = find(b, graph);
-	    
-	    if(n1==n2) return false;
-	    
-	    if(abs(graph[n1]>=abs(graph[n2]))){
-	        graph[n1] = graph[n1] + graph[n2]; 
-	        graph[n2] = n1;
-	    }
-	    
-	    else{
-	        graph[n2] = graph[n1] + graph[n2]; 
-	        graph[n1] = n2;
-	    }
-	    return true;
-	}
+	//Function to find sum of weights of edges of the Minimum Spanning Tree.
     int spanningTree(int V, vector<vector<int>> adj[])
     {
-        vector<int> graph(V,-1);
-        vector<vector<int>> temp;
-        for(int i=0;i<V;i++){ 
-            for(auto j:adj[i])
-               temp.push_back({j[1], i, j[0]});
-        }
-        int res=0;
-        sort(temp.begin(),  temp.end()); 
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
         
-        for(auto it:temp){
-            // cout<<it[0]<<" "<<it[1]<<" "<<it[2]<<endl;
-            if(Union(it[1], it[2], graph)) res+=it[0];
+        pq.push({0,0}); 
+        
+        int res=0;
+        vector<int> visited(V);
+        
+        while(!pq.empty()){
+            int dist = pq.top().first;
+            int node = pq.top().second; 
+            pq.pop();
+            if(visited[node]) continue;
+            visited[node] = 1;
+            res+=dist;
+            
+            for(auto child: adj[node]){
+                int adjNode = child[0];
+                int adjWeight = child[1];
+                if(! visited[adjNode]){
+                    pq.push({adjWeight, adjNode});
+                }
+            }
         }
+        
         return res;
     }
 };
