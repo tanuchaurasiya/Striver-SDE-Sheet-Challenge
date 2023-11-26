@@ -3,23 +3,28 @@
 using namespace std;
 
 // } Driver Code Ends
-
-
 class Solution{
     public:
-    long long findMinDiff(vector<long long> v, long long n, long long m){
+    long long findMinDiff(vector<long long> arr, long long n, long long m){
     //code
-    sort(v.begin(),v.end()); 
-    int i=0;
-    int res=v[m-1]-v[0];
-    //  for(auto i:v)
-    //      cout<<i <<" ";
-    while(i<=n-m)
-    {
-        if(res>v[i+m-1]-v[i]) res=v[i+m-1]-v[i];
-        i+=1;
+    if (m == 0 || n == 0)
+        return 0;
+ 
+    // Sort the given packets
+    sort(arr.begin(), arr.end());
+ 
+    // Number of students cannot be more than
+    // number of packets
+    if (n < m)
+        return -1;
+    long long min_diff = INT_MAX;
+ 
+    for (int i = 0; i + m - 1 < n; i++) {
+        int diff = arr[i + m - 1] - arr[i];
+        if (diff < min_diff)
+            min_diff = diff;
     }
-    return res;
+    return min_diff;
     }   
 };
 
