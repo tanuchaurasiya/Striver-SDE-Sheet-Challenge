@@ -1,20 +1,15 @@
 class Solution {
-public:
+public: 
+//     TC - nlogn 
     int firstMissingPositive(vector<int>& arr) {
-        int res=1;
-        set<int> s;
+        unordered_map<int,int> mp;
         int n = arr.size();
         for(int i=0;i<n;i++)
-            s.insert(arr[i]);
+            mp[arr[i]] = 1;
         
-        for(auto i:s){
-            if(i>0) {
-                if(i<=res)
-                    res++;
-                else
-                    break;
-            }
-        }
-        return res;
+        for(int i=1;i<=n+1;i++)
+            if(mp[i]==0) return i; 
+            
+        return -1;
     }
 };
