@@ -19,14 +19,15 @@ public:
         dp[i][j] = ans;
         return ans;
     }
-    int longestIncreasingPath(vector<vector<int>>& matrix) {
+    int longestIncreasingPath(vector<vector<int>>& matrix) { 
         int m = matrix.size();
         int n = matrix[0].size();
         memset(dp,-1, sizeof(dp));
         int res=0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){ 
-                res=max(res, help(i, j, m, n, matrix));
+                if(dp[i][j]==-1)
+                    res=max(res, help(i, j, m, n, matrix));
             }
         }
         return res;
