@@ -6,7 +6,7 @@ public:
         for(int i=0;i<n;i++){
             for(int j=0; j<i;j++){
                 long diff = (long)nums[i] - nums[j];
-                if(dp[j].find(diff) != dp[j].end()){
+                if(dp[j][diff] !=0){
                     ans+=dp[j][diff];
                     dp[i][diff] += dp[j][diff];
                 }
