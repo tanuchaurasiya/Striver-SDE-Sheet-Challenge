@@ -16,12 +16,12 @@ public:
         
         pair<int,int> left = help(root->left, ans);
         pair<int,int> right = help(root->right, ans); 
-        cout<<"left"<<left.first<<" "<<left.second<<endl;
-        cout<<"right"<<right.first<<" "<<right.second<<endl;
+        // cout<<"left"<<left.first<<" "<<left.second<<endl;
+        // cout<<"right"<<right.first<<" "<<right.second<<endl;
         if(root->left || root->right)
             ans =  max(ans, max(abs(root->val-min(left.first, right.first)), abs(root->val - max(left.second, right.second))));
-        cout<<"ans="<<ans<<endl;
-        cout<<"return "<<min(root->val, left.first)<<" "<< max(root->val, right.second)<<endl;
+        // cout<<"ans="<<ans<<endl;
+        // cout<<"return "<<min(root->val, left.first)<<" "<< max(root->val, right.second)<<endl;
         return {min(root->val, min(left.first, right.first)), max(root->val, max(left.second,right.second))};
         
     }
