@@ -1,3 +1,4 @@
+// PRIMS ALGO
 class Solution {
 public:
     int minCostConnectPoints(vector<vector<int>>& points) {
@@ -9,7 +10,7 @@ public:
                 adj[j].push_back({abs(points[i][0]-points[j][0])+abs(points[i][1]-points[j][1]),i});
             }
         }
-        
+         
         priority_queue<pair<long long int,long long int>, vector<pair<long long int, long long int>>, greater<pair<long long int, long long int>>> pq;
         long long int start=0;
         pq.push({0, start});
@@ -25,13 +26,10 @@ public:
             
             for(auto child : adj[n]){
                 if(!visited[child.second]){
-                    pq.push({child.first, child.second});
-                    
+                    pq.push({child.first, child.second});    
                 }
             }
         } 
-    
         return res;
-        
     }
 };
